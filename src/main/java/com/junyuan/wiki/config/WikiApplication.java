@@ -1,12 +1,19 @@
-package com.junyuan.wiki;
+package com.junyuan.wiki.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 
+/**
+ * SpringBootApplication注解只扫描子包
+ */
 
+//@ComponentScan("com.junyuan","com.test")
+@ComponentScan("com.junyuan")
 @SpringBootApplication
 public class WikiApplication {
 
