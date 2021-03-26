@@ -19,3 +19,7 @@ Content-Type: application/x-www-form-urlencoded
 name=TEST&content=new-element
 
 ###
+
+GET http://localhost:8080/test/list
+
+###
