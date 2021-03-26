@@ -3,7 +3,7 @@
 <mapper namespace="com.junyuan.wiki.mapper.TestMapper" >
 
     <select id="list" resultType="com.junyuan.wiki.domain.Test">
-        select `id`, `name`, `password` from `wiki`.`test`
+        select `id`, `name`, `password` from `test`
     </select>
 
 </mapper>
