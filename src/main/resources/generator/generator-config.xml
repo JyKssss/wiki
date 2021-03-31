@@ -40,7 +40,8 @@
                              targetPackage="com.junyuan.wiki.mapper"
                              type="XMLMAPPER"/>
 
-        <table tableName="demo" domainObjectName="Demo"/>
+<!--        <table tableName="demo" domainObjectName="Demo"/>-->
+        <table tableName="ebook" domainObjectName="Ebook"/>
         <!--<table tableName="ebook"/>-->
         <!--<table tableName="category"/>-->
         <!--<table tableName="doc"/>-->
