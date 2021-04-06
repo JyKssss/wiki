@@ -1,4 +1,4 @@
-GET http://localhost:8080/hello
+GET http://localhost:8880/hello
 #Accept: application/json
 
 > {%
@@ -13,13 +13,13 @@ client.test("test-hello", function() {
 
 ###
 
-POST http://localhost:8080/hello/post
+POST http://localhost:8880/hello/post
 Content-Type: application/x-www-form-urlencoded
 
 name=TEST&content=new-element
 
 ###
 
-GET http://localhost:8080/test/list
+GET http://localhost:8880/test/list
 
 ###
