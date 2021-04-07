@@ -100,7 +100,7 @@ export default defineComponent({
 
     onMounted(() =>{
       console.log("onMounted");
-      axios.get("http://localhost:8880/ebook/list?name=Spring").then(function (response) {
+      axios.get("http://localhost:8880/ebook/list").then(function (response) {
         const data= response.data;
         ebooks.value=data.content;
         ebooks1.books=data.content;
@@ -128,3 +128,13 @@ export default defineComponent({
   }
 });
 </script>
+
+<style scoped>
+  .ant-avatar {
+    width: 50px;
+    margin: 5px 0;
+    line-height: 50px;
+    height: 50px;
+    border-radius: 8%;
+  }
+</style>
