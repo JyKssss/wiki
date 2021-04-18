@@ -1,6 +1,9 @@
 package com.junyuan.wiki.req;
 
-public class EbookReq {
+/**
+ * 同名参数自动映射
+ */
+public class EbookReq extends PageReq {
     private Long id;
 
     private String name;
