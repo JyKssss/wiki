@@ -38,3 +38,6 @@ insert into ebook(id, name, description) values (2,'Vue 入门官方教程','零
 insert into ebook(id, name, description) values (3,'Python 入门官方教程','零基础入门Python开发，企业级开发首选框架');
 insert into ebook(id, name, description) values (4,'MySQL 入门官方教程','零基础入门MySQL开发，企业级开发首选框架');
 insert into ebook(id, name, description) values (5,'Oracle 入门官方教程','零基础入门Oracle开发，企业级开发首选框架');
+
+update ebook set cover='/image/cover1.png' where id=1;
+update ebook set cover='/image/cover2.png' where id=2;
