@@ -6,10 +6,7 @@ import com.junyuan.wiki.resp.CommonResp;
 import com.junyuan.wiki.resp.EbookQueryResp;
 import com.junyuan.wiki.resp.PageResp;
 import com.junyuan.wiki.service.EbookService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -36,6 +33,13 @@ public class EbookController {
     public CommonResp save(@RequestBody EbookSaveReq req){
         CommonResp resp= new CommonResp<>();
         ebookService.save(req);
+        return resp;
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    public CommonResp save(@PathVariable Long id){
+        CommonResp resp= new CommonResp<>();
+        ebookService.delete(id);
         return resp;
     }
 }
