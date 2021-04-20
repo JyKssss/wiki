@@ -1,6 +1,6 @@
 package com.junyuan.wiki.resp;
 //去掉Ebook类中可能存在的敏感信息
-public class EbookResp {
+public class EbookQueryResp {
     private Long id;
 
     private String name;

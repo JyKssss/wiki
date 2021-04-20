@@ -3,7 +3,7 @@ package com.junyuan.wiki.req;
 /**
  * 同名参数自动映射
  */
-public class EbookReq extends PageReq {
+public class EbookQueryReq extends PageReq {
     private Long id;
 
     private String name;
