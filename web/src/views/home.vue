@@ -73,7 +73,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, onMounted, ref, reactive,toRef} from 'vue';
+import {defineComponent, onMounted, ref, reactive} from 'vue';
 import axios from 'axios';
  // @ is an alias to /src
 
@@ -96,7 +96,6 @@ export default defineComponent({
   setup(){
     // console.log("setup");
     const ebooks=ref();
-    const ebooks1=reactive({books:[]});
 
     onMounted(() =>{
       // console.log("onMounted");
