@@ -31,14 +31,14 @@ public class EbookController {
 
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public CommonResp save(@RequestBody EbookSaveReq req){
+    public CommonResp save(@Valid @RequestBody EbookSaveReq req){
         CommonResp resp= new CommonResp<>();
         ebookService.save(req);
         return resp;
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-    public CommonResp save(@PathVariable Long id){
+    public CommonResp delete(@PathVariable Long id){
         CommonResp resp= new CommonResp<>();
         ebookService.delete(id);
         return resp;
