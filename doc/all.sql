@@ -55,7 +55,7 @@ create table category(
 insert into category (id,parent, name, sort) values (100,000,'前端开发',100);
 insert into category (id,parent, name, sort) values (101,100,'Vue',101);
 insert into category (id,parent, name, sort) values (102,100,'HTML & CSS',102);
-insert into category (id,parent, name, sort) values (200,200,'Java',200);
+insert into category (id,parent, name, sort) values (200,000,'Java',200);
 insert into category (id,parent, name, sort) values (201,200,'基础应用',201);
 insert into category (id,parent, name, sort) values (202,200,'框架应用',202);
 insert into category (id,parent, name, sort) values (300,000,'Python',300);
@@ -67,3 +67,5 @@ insert into category (id,parent, name, sort) values (500,000,'其它',500);
 insert into category (id,parent, name, sort) values (501,500,'服务器',501);
 insert into category (id,parent, name, sort) values (502,500,'开发工具',502);
 insert into category (id,parent, name, sort) values (503,500,'热门服务端语言',503);
+
+delete from category where id='200'
