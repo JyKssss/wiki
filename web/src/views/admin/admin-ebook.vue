@@ -278,6 +278,12 @@ export default defineComponent({
           level1.value=[];
           level1.value=Tool.array2Tree(categorys,0);
           console.log("树形结构数据： ",level1);
+
+          //加载完分类后再加载电子书 axios是异步执行 可能出现加载电子书时分类未加载好的情况
+          handleQuery({
+            page:1,
+            size:pagination.value.pageSize
+          });
         }
         else {
           message.error(data.message);
@@ -300,10 +306,7 @@ export default defineComponent({
 
     onMounted(() => {
       handleQueryCategory();
-      handleQuery({
-        page:1,
-        size:pagination.value.pageSize
-      });
+
     });
 
     return {
