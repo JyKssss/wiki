@@ -1,24 +1,25 @@
 # WIKI
 
-## Project setup
-```
-npm install
-```
+## Table of Contents
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+- [Background](#background)
+- [Install](#install)
+- [Usage](#usage)
+	- [Generator](#generator)
+- [Badge](#badge)
+- [Example Readmes](#example-readmes)
+- [Related Efforts](#related-efforts)
+- [Maintainers](#maintainers)
+- [Contributing](#contributing)
+- [License](#license)
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Background
+>This is the repository's owner's personal wiki blog website, and the purpose of the project is 
+to record personal life and thought.
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## install
+
+## usage
+
+##generator
