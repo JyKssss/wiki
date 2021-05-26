@@ -107,10 +107,37 @@ export default defineComponent({
 
       });
     };
+
+    const handleQueryEbook = () =>{
+      axios.get(process.env.VUE_APP_SERVER+"/ebook/list",{
+        params:{
+          page:1,
+          size:1000,
+          categoryId2:categoryId2,
+        }
+      }).then(function (response) {
+        const data= response.data;
+        ebooks.value=data.content.list;
+        // ebooks1.books=data.content;
+        // console.log(response);
+      });
+    }
+
     const isShowWelcome=ref(true);
+    let categoryId2 =0;
+
     const handleClick= (value : any) =>{
       console.log("menu click", value)
-      isShowWelcome.value = value.key === 'welcome';
+
+      if (value.key ==="welcome"){
+        isShowWelcome.value=true;
+      }
+      else {
+        categoryId2=value.key;
+        isShowWelcome.value=false;
+        handleQueryEbook();
+      }
+      // isShowWelcome.value = value.key === 'welcome';
     };
 
 
@@ -119,18 +146,10 @@ export default defineComponent({
     onMounted(() =>{
       handleQueryCategory();
       // console.log("onMounted");
-      axios.get(process.env.VUE_APP_SERVER+"/ebook/list",{
-        params:{
-          page:1,
-          size:1000
-        }
-      }).then(function (response) {
-        const data= response.data;
-        ebooks.value=data.content.list;
-        // ebooks1.books=data.content;
-        // console.log(response);
-      });
+      // handleQueryEbook();
     })
+
+
 
     return{
       ebooks,
