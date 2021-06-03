@@ -241,6 +241,38 @@ export default defineComponent({
       }
     }
 
+    const ids: Array<String>=[];
+    /**
+     * 将某节点及其子孙节点都加入删除List ids
+     */
+    const getDeleteIds =(treeSelectData: any, id: any) =>{
+      //层级遍历
+      for (let i = 0;i<treeSelectData.length; i++){
+        const node=treeSelectData[i];
+        //判断是不是目标节点
+        if (node.id === id){
+          console.log("delete",node);
+
+          node.disabled =true;
+          ids.push(id)
+          //遍历所有子节点 并加入删除List
+          const children= node.children;
+          if (Tool.isNotEmpty(children)){
+            for (let j = 0; j < children.length; j++) {
+              getDeleteIds(children,children[j].id);
+            }
+          }
+        }
+        else {
+          //不是目标节点
+          const children= node.children;
+          if (Tool.isNotEmpty(children)){
+            getDeleteIds(children,id);
+          }
+        }
+      }
+    }
+
 
     /**
      * 编辑
@@ -278,7 +310,9 @@ export default defineComponent({
      */
 
     const handleDelete= (id: number) =>{
-      axios.delete("/doc/delete/"+ id).then((response) => {
+      console.log(level1,level1.value,id);
+      getDeleteIds(level1.value,id);
+      axios.delete("/doc/delete/"+ids.join(",")).then((response) => {
 
         const data = response.data;
         if (data.success){
