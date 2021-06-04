@@ -4,7 +4,7 @@
     <a-layout-content
         :style="{ background: '#ffffff', padding: '24px', margin: 0, minHeight: '280px' }"
     >
-      <a-row>
+      <a-row :gutter="24">
         <a-col :span="8">
           <p>
             <a-form
@@ -41,9 +41,10 @@
               :data-source="level1"
               :loading="loading"
               :pagination="false"
+              size="small"
           >
-            <template #cover="{ text: cover }">
-              <img v-if="cover" :src="cover" alt="avatar" />
+            <template #name="{ text: record }">
+              {{record.sort}} {{text}}
             </template>
 
             <template v-slot:action="{ text, record }">
@@ -69,12 +70,21 @@
           </a-table>
         </a-col>
         <a-col :span="16">
-          <a-form :model="doc" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }">
-            <a-form-item label="名称">
-              <a-input v-model:value="doc.name" />
+          <p>
+            <a-form layout="inline" :model="param">
+              <a-form-item>
+                <a-button type="primary" @click="handleModalOk()">
+                  保存
+                </a-button>
+              </a-form-item>
+            </a-form>
+          </p>
+          <a-form :model="doc"  layout="vertical">
+            <a-form-item >
+              <a-input v-model:value="doc.name" placeholder="名称"/>
             </a-form-item>
 
-            <a-form-item label="父文档">
+            <a-form-item >
               <a-tree-select
                   v-model:value="doc.parent"
                   style="width: 100%"
@@ -87,11 +97,11 @@
               </a-tree-select>
             </a-form-item>
 
-            <a-form-item label="顺序">
-              <a-input v-model:value="doc.sort" />
+            <a-form-item >
+              <a-input v-model:value="doc.sort" placeholder="顺序"/>
             </a-form-item>
 
-            <a-form-item label="内容">
+            <a-form-item >
               <div id="content"></div>
             </a-form-item>
           </a-form>
@@ -134,6 +144,7 @@ export default defineComponent({
       {
         title: '名称',
         dataIndex: 'name'
+        // slots: { customRender: 'name' }
       },
       {
         title: '父文档',
@@ -206,6 +217,7 @@ export default defineComponent({
     const modalVisible=ref(false);
     const modalLoading=ref(false);
     const editor= new E("#content");
+    editor.config.zIndex=0;
 
     const handleModalOk= () => {
       modalLoading.value = true;
@@ -306,10 +318,6 @@ export default defineComponent({
 
       //为树添加一个“无”节点
       treeSelectData.value.unshift({id:0, name:'无'});
-      setTimeout(function () {
-        editor.create();
-      },100);
-
     }
 
     /**
@@ -325,9 +333,6 @@ export default defineComponent({
       treeSelectData.value= Tool.copy(level1.value);
       //为树添加一个“无”节点
       treeSelectData.value.unshift({id:0, name:'无'});
-      setTimeout(function () {
-        editor.create();
-      },100);
     }
 
     /**
@@ -362,6 +367,8 @@ export default defineComponent({
 
     onMounted(() => {
       handleQuery();
+
+      editor.create();
     });
 
     return {
