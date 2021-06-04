@@ -36,14 +36,16 @@
 
           </p>
           <a-table
+              v-if="level1.length > 0"
               :columns="columns"
               :row-key="record => record.id"
               :data-source="level1"
               :loading="loading"
               :pagination="false"
               size="small"
+              :defaultExpandAllRows="true"
           >
-            <template #name="{ text: record }">
+            <template #name="{ text, record }">
               {{record.sort}} {{text}}
             </template>
 
@@ -143,18 +145,8 @@ export default defineComponent({
     const columns = [
       {
         title: '名称',
-        dataIndex: 'name'
-        // slots: { customRender: 'name' }
-      },
-      {
-        title: '父文档',
-        key: 'parent',
-        dataIndex: 'parent'
-      },
-      {
-        title: '顺序',
-        key: 'sort',
-        dataIndex: 'sort'
+        dataIndex: 'name',
+        slots: { customRender: 'name' }
       },
       {
         title: 'Action',
@@ -177,7 +169,7 @@ export default defineComponent({
      *
      */
     const level1=ref();//一级文档
-
+    level1.value=[];
     /**
      * 数据查询
      **/
