@@ -201,6 +201,8 @@ export default defineComponent({
 
 
 
+
+
     //----------表单-------------
     //树选择组件的状态会随着当前编辑的节点状态变化而变化 单独声明变量处理level1数据
     const treeSelectData=ref();
@@ -305,7 +307,7 @@ export default defineComponent({
     const edit= (record: any) =>{
       modalVisible.value=true;
       doc.value=Tool.copy(record);
-
+      handleQueryContent()
       //不能选择当前阶段及其子节点
       treeSelectData.value= Tool.copy(level1.value);
       setDisable(treeSelectData.value, record.id);
@@ -358,6 +360,22 @@ export default defineComponent({
       });
     }
 
+    /**
+     * 内容查询
+     **/
+    const handleQueryContent = () => {
+      axios.get("/doc/find-content/"+doc.value.id).then((response) => {
+        const data = response.data;
+        if (data.success){
+
+          editor.txt.html(data.content);
+        }
+        else {
+          message.error(data.message);
+        }
+
+      });
+    };
 
     onMounted(() => {
       handleQuery();
