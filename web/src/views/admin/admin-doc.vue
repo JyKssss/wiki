@@ -205,15 +205,17 @@ export default defineComponent({
     //树选择组件的状态会随着当前编辑的节点状态变化而变化 单独声明变量处理level1数据
     const treeSelectData=ref();
     treeSelectData.value= [];
-    const doc=ref({});
+    const doc=ref();
+    doc.value={};
     const modalVisible=ref(false);
     const modalLoading=ref(false);
     const editor= new E("#content");
     editor.config.zIndex=0;
 
-    const handleModalOk= () => {
+    const handleModalOk= () => {//save
       modalLoading.value = true;
 
+      doc.value.content=editor.txt.html();
       axios.post("/doc/save", doc.value).then((response) => {
 
         modalLoading.value = false;

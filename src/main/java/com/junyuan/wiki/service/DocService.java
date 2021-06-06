@@ -3,8 +3,10 @@ package com.junyuan.wiki.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.junyuan.wiki.config.WikiApplication;
+import com.junyuan.wiki.domain.Content;
 import com.junyuan.wiki.domain.Doc;
 import com.junyuan.wiki.domain.DocExample;
+import com.junyuan.wiki.mapper.ContentMapper;
 import com.junyuan.wiki.mapper.DocMapper;
 import com.junyuan.wiki.req.DocQueryReq;
 import com.junyuan.wiki.req.DocSaveReq;
@@ -27,6 +29,8 @@ public class DocService {
 
     @Resource
     private DocMapper docMapper;
+    @Resource
+    private ContentMapper contentMapper;
 
     @Resource
     private SnowFlake snowFlake;
@@ -79,14 +83,22 @@ public class DocService {
      */
     public void save(DocSaveReq req){
         Doc doc =CopyUtil.copy(req, Doc.class);
+        Content content =CopyUtil.copy(req, Content.class);
         if (ObjectUtils.isEmpty(req.getId())){
             //新增
             doc.setId(snowFlake.nextId());
             docMapper.insert(doc);
+
+            content.setId(doc.getId());
+            contentMapper.insert(content);
         }
         else {
             //更新
             docMapper.updateByPrimaryKey(doc);
+            int count = contentMapper.updateByPrimaryKeyWithBLOBs(content);//包含大字段的update方法
+            if (count==0){//如果在doc表中存在但不在content中存在
+                contentMapper.insert(content);
+            }
         }
 
     }
