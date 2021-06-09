@@ -32,10 +32,10 @@ public class DocController {
     }
 
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public CommonResp all(@Valid DocQueryReq req){
+    @RequestMapping(value = "/all/{ebookId}", method = RequestMethod.GET)
+    public CommonResp all(@PathVariable Long ebookId){
         CommonResp<List<DocQueryResp>> resp= new CommonResp<>();
-        List<DocQueryResp> list=docService.all(req);
+        List<DocQueryResp> list=docService.all(ebookId);
         resp.setContent(list);
         return resp;
     }

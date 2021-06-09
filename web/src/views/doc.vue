@@ -60,7 +60,7 @@ export default defineComponent({
     const handleQuery = () => {
       //如果不清空现有数据 则编辑保存后再点击编辑还会出现旧数据
       level1.value=[];
-      axios.get("/doc/all").then((response) => {
+      axios.get("/doc/all/"+route.query.ebookId).then((response) => {
         const data = response.data;
         if (data.success){
           docs.value = data.content;

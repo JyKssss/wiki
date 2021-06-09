@@ -65,10 +65,10 @@ public class DocService {
         return pageResp;
     }
 
-    public List<DocQueryResp> all(DocQueryReq req){
+    public List<DocQueryResp> all(Long ebookId){
         DocExample docExample= new DocExample();
+        docExample.createCriteria().andEbookIdEqualTo(ebookId);
         docExample.setOrderByClause("sort asc");
-        DocExample.Criteria criteria = docExample.createCriteria();
         List<Doc> docList = docMapper.selectByExample(docExample);
 
 
