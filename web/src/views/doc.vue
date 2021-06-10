@@ -4,8 +4,7 @@
         :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
     >
       <div class="doc">
-        <h1>欢迎来到文档页面</h1>
-
+        <h3 v-if="level1.length === 0">对不起，找不到相关文档！</h3>
         <a-row>
           <a-col :span="6">
             <a-tree
