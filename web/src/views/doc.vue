@@ -14,6 +14,7 @@
                 @select="onSelect"
                 :replaceFields="{title:'name',key:'id',value:'id'}"
                 :defaultExpandAllRows="true"
+                :defaultSelectedKey="defaultSelectedKey"
             >
             </a-tree>
           </a-col>
@@ -40,6 +41,8 @@ export default defineComponent({
     const route= useRoute();
     const docs = ref();
     const html=ref();
+    const defaultSelectedKey= ref();
+    defaultSelectedKey.value= [];
 
     /**
      * 一级文档树 children是二级文档
@@ -55,26 +58,6 @@ export default defineComponent({
      */
     const level1=ref();//一级文档
     level1.value=[];
-    /**
-     * 数据查询
-     **/
-    const handleQuery = () => {
-      //如果不清空现有数据 则编辑保存后再点击编辑还会出现旧数据
-      level1.value=[];
-      axios.get("/doc/all/"+route.query.ebookId).then((response) => {
-        const data = response.data;
-        if (data.success){
-          docs.value = data.content;
-
-          level1.value=[];
-          level1.value=Tool.array2Tree(docs.value,0);
-        }
-        else {
-          message.error(data.message);
-        }
-
-      });
-    };
 
     /**
      * 内容查询
@@ -91,6 +74,34 @@ export default defineComponent({
 
       });
     };
+
+    /**
+     * 数据查询
+     **/
+    const handleQuery = () => {
+      //如果不清空现有数据 则编辑保存后再点击编辑还会出现旧数据
+      level1.value=[];
+      axios.get("/doc/all/"+route.query.ebookId).then((response) => {
+        const data = response.data;
+        if (data.success){
+          docs.value = data.content;
+
+          level1.value=[];
+          level1.value=Tool.array2Tree(docs.value,0);
+
+          if (Tool.isNotEmpty(level1)){
+            defaultSelectedKey.value=[level1.value[0].id];
+            handleQueryContent(level1.value[0].id);
+          }
+        }
+        else {
+          message.error(data.message);
+        }
+
+      });
+    };
+
+
 
     const onSelect=(selectedKeys:any, info:any)=>{
       console.log('selected',selectedKeys,info);
@@ -110,6 +121,7 @@ export default defineComponent({
       html,
 
       onSelect,
+      defaultSelectedKey,
     }
 
   }
